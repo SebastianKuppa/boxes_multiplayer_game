@@ -10,6 +10,9 @@ class BoxesGame:
         pygame.display.set_caption('Boxes Multiplayer Game')
         # init clock
         self.clock = pygame.time.Clock()
+        # init lists for board values
+        self.boardh = [[False for x in range(6)] for y in range(7)]
+        self.boardv = [[False for x in range(7)] for y in range(6)]
 
     def update(self):
         # sleep function
