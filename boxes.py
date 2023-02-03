@@ -28,13 +28,13 @@ class BoxesGame:
     def drawBoard(self):
         for x in range(6):
             for y in range(7):
-                if not self.boardh[y][x]:
+                if not self.boardh[x][y]:
                     self.window.blit(self.normal_line_h, [x*64+5, y*64])
                 else:
                     self.window.blit(self.bar_h, [x * 64 + 5, y * 64])
         for x in range(7):
             for y in range(6):
-                if not self.boardv[y][x]:
+                if not self.boardv[x][y]:
                     self.window.blit(self.normal_line_v, [x * 64 + 5, y * 64])
                 else:
                     self.window.blit(self.bar_v, [x * 64 + 5, y * 64])
