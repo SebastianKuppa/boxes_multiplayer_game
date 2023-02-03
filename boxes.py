@@ -25,6 +25,20 @@ class BoxesGame:
         self.hoverline_v = pygame.image.load('images/hover.png')
         self.hoverline_h = pygame.transform.rotate(pygame.image.load('images/hover.png'), -90)
 
+    def drawBoard(self):
+        for x in range(6):
+            for y in range(7):
+                if not self.boardh[y][x]:
+                    self.window.blit(self.normal_line_h, [x*64+5, y*64])
+                else:
+                    self.window.blit(self.bar_h, [x * 64 + 5, y * 64])
+        for x in range(7):
+            for y in range(6):
+                if not self.boardv[y][x]:
+                    self.window.blit(self.normal_line_v, [x * 64 + 5, y * 64])
+                else:
+                    self.window.blit(self.bar_v, [x * 64 + 5, y * 64])
+
     def update(self):
         # sleep function
         self.clock.tick(60)
