@@ -13,6 +13,17 @@ class BoxesGame:
         # init lists for board values
         self.boardh = [[False for x in range(6)] for y in range(7)]
         self.boardv = [[False for x in range(7)] for y in range(6)]
+        # init line images
+        self.initGraphics()
+
+    def initGraphics(self):
+        self.normal_line_v = pygame.image.load('images/normalline.png')
+        self.normal_line_h = pygame.transform.rotate(pygame.image.load('images/normalline.png'),
+                                                     -90)
+        self.bar_v = pygame.image.load('images/bar_done.png')
+        self.bar_h = pygame.transform.rotate(pygame.image.load('images/bar_done.png'), -90)
+        self.hoverline_v = pygame.image.load('images/hover.png')
+        self.hoverline_h = pygame.transform.rotate(pygame.image.load('images/hover.png'), -90)
 
     def update(self):
         # sleep function
