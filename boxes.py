@@ -44,7 +44,8 @@ class BoxesGame:
         self.clock.tick(60)
         # clear screen
         self.window.fill(0)
-
+        # draw the current state of the board
+        self.drawBoard()
         for event in pygame.event.get():
             # exit game when quit button is pressed
             if event.type == pygame.QUIT:
