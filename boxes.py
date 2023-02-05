@@ -1,4 +1,5 @@
 import pygame
+import math
 
 
 class BoxesGame:
@@ -15,8 +16,8 @@ class BoxesGame:
         self.boardv = [[False for x in range(7)] for y in range(6)]  # vertical bars
 
         # debugging
-        # self.boardv[3][3] = True
-        # self.boardh[3][3] = True
+        # self.boardv[0][1] = True
+        # self.boardh[0][0] = True
 
         # init line images
         self.initGraphics()
@@ -56,6 +57,10 @@ class BoxesGame:
             # exit game when quit button is pressed
             if event.type == pygame.QUIT:
                 exit()
+        mouse = pygame.mouse.get_pos()
+        x_pos = int(math.ceil((mouse[0] - 32)/64.0))
+        y_pos = int(math.ceil((mouse[1] - 32)/64.0))
+        # print(f'x_pos: {x_pos}, y_pos: {y_pos}')
         # update the window screen
         pygame.display.flip()
 
