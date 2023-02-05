@@ -57,10 +57,14 @@ class BoxesGame:
             # exit game when quit button is pressed
             if event.type == pygame.QUIT:
                 exit()
+        # get current mouse position in pixels (as tuple)
         mouse = pygame.mouse.get_pos()
+        # calculate bar index, which the mouse is closest to
         x_pos = int(math.ceil((mouse[0] - 32)/64.0))
         y_pos = int(math.ceil((mouse[1] - 32)/64.0))
-        # print(f'x_pos: {x_pos}, y_pos: {y_pos}')
+        #
+        is_horizontal = abs(mouse[1] - y_pos*64) < abs(mouse[0] - x_pos*64)
+        print(f'is_horizontal: {is_horizontal}')
         # update the window screen
         pygame.display.flip()
 
