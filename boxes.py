@@ -65,7 +65,7 @@ class BoxesGame:
         # divide the area inside the cube into 4 triangles and determine, based on the mouse position
         # if the mouse position is closer to one of the horizontal bars or the vertical ones
         is_horizontal = abs(mouse[1] - y_pos*64) < abs(mouse[0] - x_pos*64)
-        # print(f'is_horizontal: {is_horizontal}')
+        print(f'is_horizontal: {is_horizontal}')
 
         x_pos = x_pos - 1 if (mouse[0] - x_pos*64 < 0) and is_horizontal else x_pos
         y_pos = y_pos - 1 if (mouse[1] - y_pos*64 < 0) and is_horizontal else y_pos
@@ -74,9 +74,9 @@ class BoxesGame:
         isOutOfBounds = False
 
         try:
-            if not board[y_pos][x_pos]: self.window.blit(self.hoverline_h if is_horizontal else self.hoverline_v,
+            if not board[y_pos][x_pos]: self.window.blit(self.hoverline_v if is_horizontal else self.hoverline_h,
                                                          [x_pos * 64 if is_horizontal else x_pos*64+5,
-                                                          y_pos])
+                                                          y_pos * 64 if is_horizontal else y_pos*64+5])
         except IndexError:
             isOutOfBounds =True
             pass
