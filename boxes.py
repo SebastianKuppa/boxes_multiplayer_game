@@ -68,15 +68,15 @@ class BoxesGame:
         print(f'is_horizontal: {is_horizontal}')
 
         x_pos = x_pos - 1 if (mouse[0] - x_pos*64 < 0) and is_horizontal else x_pos
-        y_pos = y_pos - 1 if (mouse[1] - y_pos*64 < 0) and is_horizontal else y_pos
+        y_pos = y_pos - 1 if (mouse[1] - (y_pos*64) < 0) and not is_horizontal else y_pos
 
         board = self.boardh if is_horizontal else self.boardv
         isOutOfBounds = False
 
         try:
             if not board[y_pos][x_pos]: self.window.blit(self.hoverline_v if is_horizontal else self.hoverline_h,
-                                                         [x_pos * 64 if is_horizontal else x_pos*64+5,
-                                                          y_pos * 64 if is_horizontal else y_pos*64+5])
+                                                         [(x_pos * 64)+5 if is_horizontal else (x_pos*64)+5,
+                                                          (y_pos * 64) if is_horizontal else (y_pos*64)])
         except IndexError:
             isOutOfBounds =True
             pass
