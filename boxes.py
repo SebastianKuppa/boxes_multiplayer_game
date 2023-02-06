@@ -59,6 +59,8 @@ class BoxesGame:
                 exit()
         # get current mouse position in pixels (as tuple)
         mouse = pygame.mouse.get_pos()
+        # get boolean if mouse button is currently pressed
+        mouse_pressed = pygame.mouse.get_pressed()[0]
         # calculate bar index, which the mouse is closest to
         x_pos = int(math.ceil((mouse[0] - 32)/64.0))
         y_pos = int(math.ceil((mouse[1] - 32)/64.0))
@@ -74,17 +76,28 @@ class BoxesGame:
         isOutOfBounds = False
 
         try:
-            if not board[y_pos][x_pos]: self.window.blit(self.hoverline_v if is_horizontal else self.hoverline_h,
-                                                         [(x_pos * 64)+5 if is_horizontal else (x_pos*64)+5,
-                                                          (y_pos * 64) if is_horizontal else (y_pos*64)])
+            if not board[y_pos][x_pos]:
+                # if not mouse_pressed:
+                self.window.blit(self.hoverline_v if is_horizontal else self.hoverline_h,
+                                 [(x_pos * 64)+5,
+                                  (y_pos * 64)])
+                # else:
+                #     self.window.blit(self.bar_h if is_horizontal else self.bar_v,
+                #                      [(x_pos * 64) + 5,
+                #                       (y_pos * 64)])
         except IndexError:
             isOutOfBounds =True
             pass
         if not isOutOfBounds:
-            alreadyReplaced = board[y_pos][x_pos]
+            alreadyPlaced = board[y_pos][x_pos]
         else:
-            alreadyReplaced = False
+            alreadyPlaced = False
 
+        if pygame.mouse.get_pressed()[0] and not alreadyPlaced:
+            if is_horizontal:
+                self.boardh[y_pos][x_pos] = True
+            else:
+                self.boardv[y_pos][x_pos] = True
 
         # update the window screen
         pygame.display.flip()
