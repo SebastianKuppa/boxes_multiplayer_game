@@ -94,10 +94,7 @@ class BoxesGame:
             alreadyPlaced = False
 
         if pygame.mouse.get_pressed()[0] and not alreadyPlaced:
-            if is_horizontal:
-                self.boardh[y_pos][x_pos] = True
-            else:
-                self.boardv[y_pos][x_pos] = True
+            board[y_pos][x_pos] = True
 
         # update the window screen
         pygame.display.flip()
