@@ -93,7 +93,7 @@ class BoxesGame:
         else:
             alreadyPlaced = False
 
-        if pygame.mouse.get_pressed()[0] and not alreadyPlaced:
+        if pygame.mouse.get_pressed()[0] and not alreadyPlaced and not isOutOfBounds:
             board[y_pos][x_pos] = True
 
         # update the window screen
