@@ -46,6 +46,12 @@ class BoxesGame:
                 else:
                     self.window.blit(self.bar_v, [x * 64 + 5, y * 64])
 
+    def drawHUD(self):
+        font = pygame.font.Font('freesansbold.ttf', 32)
+        text = font.render('Your turn:', True, 'blue')
+        # draw background for the area below the gameboard
+        self.window.blit(text, (10, 400))
+
     def update(self):
         # sleep function
         self.clock.tick(60)
@@ -53,6 +59,8 @@ class BoxesGame:
         self.window.fill(0)
         # draw the current state of the board
         self.drawBoard()
+        # draw HUD
+        self.drawHUD()
         for event in pygame.event.get():
             # exit game when quit button is pressed
             if event.type == pygame.QUIT:
