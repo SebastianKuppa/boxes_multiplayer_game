@@ -50,10 +50,13 @@ class BoxesGame:
                     self.window.blit(self.bar_v, [x * 64 + 5, y * 64])
 
     def drawHUD(self):
+        # init font for text "Your turn"
         font = pygame.font.Font('freesansbold.ttf', 32)
+        # render text
         text = font.render('Your turn:', True, 'blue')
         # draw background for the area below the gameboard
         self.window.blit(text, (10, 400))
+        # add light bulb to see if its your turn or not
         self.window.blit(self.green_light, (170, 400))
 
     def update(self):
