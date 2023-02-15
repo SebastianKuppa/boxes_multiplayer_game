@@ -31,6 +31,9 @@ class BoxesGame:
         self.hoverline_v = pygame.image.load('images/hover.png')
         self.hoverline_h = pygame.transform.rotate(pygame.image.load('images/hover.png'), -90)
 
+        self.green_light = pygame.image.load('images/green_light.png')
+        self.red_light = pygame.image.load('images/red_light.png')
+
     def drawBoard(self):
         for x in range(6):
             for y in range(7):
@@ -51,6 +54,7 @@ class BoxesGame:
         text = font.render('Your turn:', True, 'blue')
         # draw background for the area below the gameboard
         self.window.blit(text, (10, 400))
+        self.window.blit(self.green_light, (170, 400))
 
     def update(self):
         # sleep function
