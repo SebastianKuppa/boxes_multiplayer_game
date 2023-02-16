@@ -15,12 +15,13 @@ class BoxesGame:
         self.boardh = [[False for x in range(6)] for y in range(7)]  # horizontal bars
         self.boardv = [[False for x in range(7)] for y in range(6)]  # vertical bars
 
-        # debugging
-        # self.boardv[0][1] = True
-        # self.boardh[0][0] = True
-
         # init line images
         self.initGraphics()
+
+        self.turn = True
+        self.me = 0
+        self.enemy = 0
+        self.didIwin = False
 
     def initGraphics(self):
         self.normal_line_v = pygame.image.load('images/normalline.png')
