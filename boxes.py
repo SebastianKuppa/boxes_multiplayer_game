@@ -5,9 +5,10 @@ import math
 class BoxesGame:
     def __init__(self):
         pygame.init()
-        bounds = (400, 489)
+        pygame.display.list_modes()
+        # bounds = (400, 489)
         # init window
-        self.window = pygame.display.set_mode(bounds,)
+        self.window = pygame.display.set_mode((400, 489))
         pygame.display.set_caption('Boxes Multiplayer Game')
         # init clock
         self.clock = pygame.time.Clock()
