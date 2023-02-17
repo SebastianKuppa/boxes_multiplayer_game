@@ -1,5 +1,3 @@
-import pygame
-
 from boxes import BoxesGame
 # test
 
