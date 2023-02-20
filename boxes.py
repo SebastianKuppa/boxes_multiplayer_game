@@ -58,8 +58,18 @@ class BoxesGame:
         text = font.render('Your turn:', True, 'blue')
         # draw background for the area below the gameboard
         self.window.blit(text, (10, 400))
-        # add light bulb to see if its your turn or not
+        # add light bulb to see if it is your turn or not
         self.window.blit(self.green_light, (170, 400))
+        # adding different sized fonts
+        font_withsize20 = pygame.font.SysFont(None, 20)
+        font_withsize64 = pygame.font.SysFont(None, 64)
+
+        score_me = font_withsize64.render(str(self.me), True, [255, 255, 255])
+        score_other = font_withsize64.render(str(self.enemy), True, [255, 255, 255])
+        score_text_me = font_withsize64.render("YOU", True, [255, 255, 255])
+        score_text_other = font_withsize64.render("OTHER PLAYER", True, [255, 255, 255])
+
+
 
     def update(self):
         # sleep function
