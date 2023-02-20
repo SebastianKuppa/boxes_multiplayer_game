@@ -68,10 +68,10 @@ class BoxesGame:
         score_text_me = font_withsize64.render("YOU", True, [255, 255, 255])
         score_text_other = font_withsize64.render("OTHER PLAYER", True, [255, 255, 255])
 
-        self.window.blit(score_me, (10, 450))
-        self.window.blit(score_text_me, (240, 450))
-        self.window.blit(score_other, (10, 500))
-        self.window.blit(score_text_other, (240, 500))
+        self.window.blit(score_text_me, (10, 450))
+        self.window.blit(score_me, (10, 500))
+        self.window.blit(score_text_other, (240, 450))
+        self.window.blit(score_other, (240, 500))
 
     def update(self):
         # sleep function
