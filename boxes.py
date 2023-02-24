@@ -38,12 +38,14 @@ class BoxesGame:
         self.green_light = pygame.image.load('images/green_light.png')
         self.red_light = pygame.image.load('images/red_light.png')
 
-
     def drawOwnerMap(self):
         for x in range(6):
             for y in range(6):
                 if self.owner[x][y] != 0:
-
+                    if self.owner[x][y] == "win":
+                        self.window.blit(self.marker, (x*64+5, y*64+5))
+                    if self.owner[x][y] == "lose":
+                        self.window.blit(self.othermarker, (x*64+5, y*64+5))
 
     def drawBoard(self):
         for x in range(6):
