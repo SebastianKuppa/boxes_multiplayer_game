@@ -23,6 +23,9 @@ class BoxesGame:
         self.enemy = 0
         self.didIwin = False
 
+        # keeping track of the squares which are won by player
+        self.owner = [[0 for x in range(6)] for y in range(6)]
+
     def initGraphics(self):
         self.normal_line_v = pygame.image.load('images/normalline.png')
         self.normal_line_h = pygame.transform.rotate(pygame.image.load('images/normalline.png'),
@@ -34,6 +37,13 @@ class BoxesGame:
 
         self.green_light = pygame.image.load('images/green_light.png')
         self.red_light = pygame.image.load('images/red_light.png')
+
+
+    def drawOwnerMap(self):
+        for x in range(6):
+            for y in range(6):
+                if self.owner[x][y] != 0:
+
 
     def drawBoard(self):
         for x in range(6):
