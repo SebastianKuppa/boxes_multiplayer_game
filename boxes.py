@@ -136,3 +136,10 @@ class BoxesGame:
         # update the window screen
         pygame.display.flip()
 
+    def finished(self):
+        self.window.blit(self.gameover if not self.didIwin else self.winningscreen, (0, 0))
+        while 1:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    exit()
+            pygame.display.flip()
