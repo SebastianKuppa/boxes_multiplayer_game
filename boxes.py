@@ -26,6 +26,9 @@ class BoxesGame:
         # keeping track of the squares which are won by player
         self.owner = [[0 for x in range(6)] for y in range(6)]
 
+        # testing
+        # self.finished()
+
     def initGraphics(self):
         self.normal_line_v = pygame.image.load('images/normalline.png')
         self.normal_line_h = pygame.transform.rotate(pygame.image.load('images/normalline.png'),
