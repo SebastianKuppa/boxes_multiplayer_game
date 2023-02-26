@@ -38,6 +38,9 @@ class BoxesGame:
         self.green_light = pygame.image.load('images/green_light.png')
         self.red_light = pygame.image.load('images/red_light.png')
 
+        self.gameover = pygame.image.load('images/gameover.png')
+        self.youwin = pygame.image.load('images/youwin.png')
+
     def drawOwnerMap(self):
         for x in range(6):
             for y in range(6):
@@ -137,7 +140,7 @@ class BoxesGame:
         pygame.display.flip()
 
     def finished(self):
-        self.window.blit(self.gameover if not self.didIwin else self.winningscreen, (0, 0))
+        self.window.blit(self.gameover if not self.didIwin else self.youwin, (0, 0))
         while 1:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
