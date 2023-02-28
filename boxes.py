@@ -1,8 +1,11 @@
+from PodSixNet.Connection import ConnectionListener, connection
+from time import sleep
+
 import pygame
 import math
 
 
-class BoxesGame:
+class BoxesGame(ConnectionListener):
     def __init__(self):
         pygame.init()
         pygame.display.list_modes()
@@ -26,8 +29,8 @@ class BoxesGame:
         # keeping track of the squares which are won by player
         self.owner = [[0 for x in range(6)] for y in range(6)]
 
-        # testing
-        # self.finished()
+        self.Connect()
+        print("Connected..")
 
     def initGraphics(self):
         self.normal_line_v = pygame.image.load('images/normalline.png')
@@ -92,6 +95,8 @@ class BoxesGame:
         self.window.blit(score_other, (240, 500))
 
     def update(self):
+        connection.Pump()
+        self.Pump()
         # sleep function
         self.clock.tick(60)
         # clear screen
