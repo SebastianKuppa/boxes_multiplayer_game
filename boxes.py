@@ -29,7 +29,8 @@ class BoxesGame(ConnectionListener):
         # keeping track of the squares which are won by player
         self.owner = [[0 for x in range(6)] for y in range(6)]
 
-        self.Connect()
+        # self.Connect()
+        connection.DoConnect(address=("127.0.0.1", 5071))
         print("Connected..")
 
     def initGraphics(self):
