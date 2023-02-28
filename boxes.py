@@ -26,6 +26,9 @@ class BoxesGame(ConnectionListener):
         self.enemy = 0
         self.didIwin = False
 
+        self.gameid = None
+        self.num = None
+
         # keeping track of the squares which are won by player
         self.owner = [[0 for x in range(6)] for y in range(6)]
 
@@ -143,7 +146,14 @@ class BoxesGame(ConnectionListener):
             alreadyPlaced = False
 
         if pygame.mouse.get_pressed()[0] and not alreadyPlaced and not isOutOfBounds:
-            board[y_pos][x_pos] = True
+            if is_horizontal:
+                self.boardh[y_pos][x_pos] = True
+                self.Send({"action": "place", "x": x_pos, "y": y_pos, "is_horizontal": is_horizontal,
+                           "gameid": self.gameid, "num": self.num})
+            else:
+                self.boardv[y_pos][x_pos] = True
+                self.Send({"action": "place", "x": x_pos, "y": y_pos, "is_horizontal": is_horizontal,
+                           "gameid": self.gameid, "num": self.num})
 
         # update the window screen
         pygame.display.flip()
