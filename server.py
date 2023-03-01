@@ -10,6 +10,12 @@ class ClientChannel(PodSixNet.Channel.Channel):
 
 
 class BoxesServer(PodSixNet.Server.Server):
+    def __init__(self, *args, **kwargs):
+        PodSixNet.Server.Server.__init__(self, *args, **kwargs)
+        self.games = []
+        self.queue = None
+        self.currentIndex = 0
+
     channelClass = ClientChannel
 
     def Connected(self, channel, addr):
