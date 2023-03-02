@@ -36,6 +36,21 @@ class BoxesGame(ConnectionListener):
         connection.DoConnect(address=("127.0.0.1", 5071))
         print("Connected..")
 
+        self.running = False
+        while not self.running:
+            self.Pump()
+            connection.Pump()
+            sleep(.01)
+        # get player attribs
+        if self.num == 0:
+            self.turn = True
+            self.marker = self.greenplayer
+            self.othermarker = self.blueplayer
+        else:
+            self.turn = False
+            self.marker = self.blueplayer
+            self.othermarker = self.greenplayer
+
     def initGraphics(self):
         self.normal_line_v = pygame.image.load('images/normalline.png')
         self.normal_line_h = pygame.transform.rotate(pygame.image.load('images/normalline.png'),
@@ -50,6 +65,9 @@ class BoxesGame(ConnectionListener):
 
         self.gameover = pygame.image.load('images/gameover.png')
         self.youwin = pygame.image.load('images/youwin.png')
+
+        self.greenplayer = pygame.image.load("greenplayer.png")
+        self.blueplayer = pygame.image.load("blueplayer.png")
 
     def drawOwnerMap(self):
         for x in range(6):
