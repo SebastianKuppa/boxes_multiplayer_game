@@ -165,3 +165,8 @@ class BoxesGame(ConnectionListener):
                 if event.type == pygame.QUIT:
                     exit()
             pygame.display.flip()
+
+    def Network_startgame(self, data):
+        self.running = True
+        self.num = data["player"]
+        self.gameid = data["gameid"]
