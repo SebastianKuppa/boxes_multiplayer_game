@@ -23,6 +23,7 @@ class BoxesServer(PodSixNet.Server.Server):
         if self.queue is None:
             self.currentIndex += 1
             channel.gameid = self.currentIndex
+            self.queue = Game(channel, self.currentIndex)
         else:
             channel.gameid = self.currentIndex
             self.queue.player1 = channel

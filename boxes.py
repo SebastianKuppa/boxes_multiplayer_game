@@ -66,8 +66,8 @@ class BoxesGame(ConnectionListener):
         self.gameover = pygame.image.load('images/gameover.png')
         self.youwin = pygame.image.load('images/youwin.png')
 
-        self.greenplayer = pygame.image.load("greenplayer.png")
-        self.blueplayer = pygame.image.load("blueplayer.png")
+        self.greenplayer = pygame.image.load("images/green_rect.png")
+        self.blueplayer = pygame.image.load("images/blue_rect.png")
 
     def drawOwnerMap(self):
         for x in range(6):
@@ -127,6 +127,7 @@ class BoxesGame(ConnectionListener):
         self.drawBoard()
         # draw HUD
         self.drawHUD()
+        self.drawOwnerMap()
         for event in pygame.event.get():
             # exit game when quit button is pressed
             if event.type == pygame.QUIT:
