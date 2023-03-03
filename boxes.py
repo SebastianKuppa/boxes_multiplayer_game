@@ -32,8 +32,8 @@ class BoxesGame(ConnectionListener):
         # keeping track of the squares which are won by player
         self.owner = [[0 for x in range(6)] for y in range(6)]
 
-        # self.Connect()
-        connection.DoConnect(address=("127.0.0.1", 5071))
+        self.Connect(address=("127.0.0.1", 5071))
+        # connection.DoConnect(address=("127.0.0.1", 5071))
         print("Connected..")
 
         self.running = False
@@ -118,7 +118,7 @@ class BoxesGame(ConnectionListener):
 
     def update(self):
         connection.Pump()
-        self.Pump()
+        # self.Pump()
         # sleep function
         self.clock.tick(60)
         # clear screen

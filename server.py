@@ -48,9 +48,21 @@ class Game:
         # init gameID
         self.gameid = currentindex
 
+    def placeLine(self, is_h, x, y, data, num):
+        if num == self.turn:
+            self.turn = 0 if self.turn else 1
+            # place line in game
+            if is_h:
+                self.boardh[y][x] = True
+            else:
+                self.boardv[y][x] = True
+            # send data to players
+            self.player0.Send(data)
+            self.player1.Send(data)
+
 
 print("STARTING SERVER ON LOCALHOST.")
-boxesServe = BoxesServer()
+boxesServer = BoxesServer()
 while True:
-    boxesServe.Pump()
+    boxesServer.Pump()
     sleep(.01)
