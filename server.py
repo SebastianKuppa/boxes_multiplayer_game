@@ -32,6 +32,11 @@ class BoxesServer(PodSixNet.Server.Server):
             self.games.append(self.queue)
             self.queue = None
 
+    def placeLine(self, is_h, x, y, data, gameid, num):
+        game = [a for a in self.games if a.gameid == gameid]
+        if len(game) == 1:
+            game[0].placeLine(is_h, x, y, data, num)
+
 
 class Game:
     def __init__(self, player0, currentindex):
