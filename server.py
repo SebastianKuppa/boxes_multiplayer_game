@@ -6,7 +6,27 @@ from time import sleep
 
 class ClientChannel(PodSixNet.Channel.Channel):
     def Network(self, data):
-        print(data)
+        print(f"Network data as follows {data}")
+
+    def Network_place(self, data):
+        # deconsolidate all of the data from the dictionary
+
+        # horizontal or vertical?
+        hv = data["is_horizontal"]
+        # x of placed line
+        x = data["x"]
+
+        # y of placed line
+        y = data["y"]
+
+        # player number (1 or 0)
+        num = data["num"]
+
+        # id of game given by server at start of game
+        self.gameid = data["gameid"]
+
+        # tells server to place line
+        self._server.placeLine(hv, x, y, data, self.gameid, num)
 
 
 class BoxesServer(PodSixNet.Server.Server):
@@ -54,6 +74,7 @@ class Game:
         self.gameid = currentindex
 
     def placeLine(self, is_h, x, y, data, num):
+        # make sure it's their turn
         if num == self.turn:
             self.turn = 0 if self.turn else 1
             # place line in game
@@ -61,7 +82,8 @@ class Game:
                 self.boardh[y][x] = True
             else:
                 self.boardv[y][x] = True
-            # send data to players
+            # send data and turn data to each player
+            print("send data to players")
             self.player0.Send(data)
             self.player1.Send(data)
 

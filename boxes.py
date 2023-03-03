@@ -189,3 +189,15 @@ class BoxesGame(ConnectionListener):
         self.running = True
         self.num = data["player"]
         self.gameid = data["gameid"]
+
+    def Network_place(self, data):
+        print("starting placing")
+        # get attributes
+        x = data["x"]
+        y = data["y"]
+        hv = data["is_horizontal"]
+        # horizontal or vertical
+        if hv:
+            self.boardh[y][x] = True
+        else:
+            self.boardv[y][x] = True
