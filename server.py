@@ -10,7 +10,7 @@ class ClientChannel(PodSixNet.Channel.Channel):
 
     def Network_place(self, data):
         # deconsolidate all of the data from the dictionary
-
+        print("Network_place is executed...")
         # horizontal or vertical?
         hv = data["is_horizontal"]
         # x of placed line
@@ -30,13 +30,13 @@ class ClientChannel(PodSixNet.Channel.Channel):
 
 
 class BoxesServer(PodSixNet.Server.Server):
+    channelClass = ClientChannel
+
     def __init__(self, *args, **kwargs):
         PodSixNet.Server.Server.__init__(self, *args, **kwargs)
         self.games = []
         self.queue = None
         self.currentIndex = 0
-
-    channelClass = ClientChannel
 
     def Connected(self, channel, addr):
         print('new connection: ', channel)
@@ -55,7 +55,7 @@ class BoxesServer(PodSixNet.Server.Server):
     def placeLine(self, is_h, x, y, data, gameid, num):
         game = [a for a in self.games if a.gameid == gameid]
         if len(game) == 1:
-            game[0].placeLine(is_h, x, y, data, num)
+            self.games[0].placeLine(is_h, x, y, data, num)
 
 
 class Game:
@@ -83,9 +83,8 @@ class Game:
             else:
                 self.boardv[y][x] = True
             # send data and turn data to each player
-            print("send data to players")
-            self.player0.Send(data)
-            self.player1.Send(data)
+            self.player0.Send({'action': 'place', 'x': x, 'y': y, 'is_horizontal': is_h, 'gameid': self.gameid, 'num': num})
+            self.player1.Send({'action': 'place', 'x': x, 'y': y, 'is_horizontal': is_h, 'gameid': self.gameid, 'num': num})
 
 
 print("STARTING SERVER ON LOCALHOST.")

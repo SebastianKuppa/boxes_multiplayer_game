@@ -118,7 +118,7 @@ class BoxesGame(ConnectionListener):
 
     def update(self):
         connection.Pump()
-        # self.Pump()
+        self.Pump()
         # sleep function
         self.clock.tick(60)
         # clear screen
@@ -185,13 +185,19 @@ class BoxesGame(ConnectionListener):
                     exit()
             pygame.display.flip()
 
+    def Network(self, data):
+        print("random data: ")
+        print("Network:", data)
+
+
     def Network_startgame(self, data):
+        print("Network_startgame:", data)
         self.running = True
         self.num = data["player"]
         self.gameid = data["gameid"]
 
     def Network_place(self, data):
-        print("starting placing")
+        print("Received placing Data")
         # get attributes
         x = data["x"]
         y = data["y"]
