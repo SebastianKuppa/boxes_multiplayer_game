@@ -103,7 +103,7 @@ class BoxesGame(ConnectionListener):
         # draw background for the area below the gameboard
         self.window.blit(text, (10, 400))
         # add light bulb to see if it is your turn or not
-        self.window.blit(self.green_light, (170, 400))
+        self.window.blit(self.green_light if self.turn else self.red_light, (170, 400))
         # adding different sized fonts
         font_withsize20 = pygame.font.SysFont(None, 20)
         font_withsize64 = pygame.font.SysFont(None, 64)
