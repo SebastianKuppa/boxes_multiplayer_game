@@ -29,6 +29,8 @@ class BoxesGame(ConnectionListener):
         self.gameid = None
         self.num = None
 
+        self.justplaced = 10
+
         # keeping track of the squares which are won by player
         self.owner = [[0 for x in range(6)] for y in range(6)]
 
@@ -117,6 +119,8 @@ class BoxesGame(ConnectionListener):
         self.window.blit(score_other, (240, 500))
 
     def update(self):
+        self.justplaced -= 1
+
         connection.Pump()
         self.Pump()
         # sleep function
@@ -164,7 +168,8 @@ class BoxesGame(ConnectionListener):
         else:
             alreadyPlaced = False
 
-        if pygame.mouse.get_pressed()[0] and not alreadyPlaced and not isOutOfBounds:
+        if pygame.mouse.get_pressed()[0] and not alreadyPlaced and not isOutOfBounds \
+                and self.turn is True and self.justplaced <= 0:
             if is_horizontal:
                 self.boardh[y_pos][x_pos] = True
                 self.Send({"action": "place", "x": x_pos, "y": y_pos, "is_horizontal": is_horizontal,
@@ -173,7 +178,7 @@ class BoxesGame(ConnectionListener):
                 self.boardv[y_pos][x_pos] = True
                 self.Send({"action": "place", "x": x_pos, "y": y_pos, "is_horizontal": is_horizontal,
                            "gameid": self.gameid, "num": self.num})
-
+            self.justplaced = 100
         # update the window screen
         pygame.display.flip()
 
