@@ -190,7 +190,7 @@ class BoxesGame(ConnectionListener):
             pygame.display.flip()
 
     def Network(self, data):
-        print("random data: ")
+        # print("random data: ")
         print("Network:", data)
 
 
@@ -201,7 +201,7 @@ class BoxesGame(ConnectionListener):
         self.gameid = data["gameid"]
 
     def Network_place(self, data):
-        print("Received placing Data")
+        # print("Received placing Data")
         # get attributes
         x = data["x"]
         y = data["y"]
@@ -213,6 +213,6 @@ class BoxesGame(ConnectionListener):
             self.boardv[y][x] = True
 
     def Network_yourturn(self, data):
-        print('Network_yourturn:')
-        print("Network:", data)
+        # print('Network_yourturn:')
+        # print("Network:", data)
         self.turn = data["torf"]
