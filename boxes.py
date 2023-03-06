@@ -120,7 +120,7 @@ class BoxesGame(ConnectionListener):
 
     def update(self):
         self.justplaced -= 1
-
+        print(f'self.turn: {self.turn}')
         connection.Pump()
         self.Pump()
         # sleep function
@@ -212,3 +212,8 @@ class BoxesGame(ConnectionListener):
             self.boardh[y][x] = True
         else:
             self.boardv[y][x] = True
+
+    def Network_yourturn(self, data):
+        print('Network_yourturn:')
+        print("Network:", data)
+        self.turn = data["torf"]

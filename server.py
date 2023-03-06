@@ -76,15 +76,21 @@ class Game:
     def placeLine(self, is_h, x, y, data, num):
         # make sure it's their turn
         if num == self.turn:
-            self.turn = 0 if self.turn else 1
+            self.turn = 0 if self.turn == 1 else 1
             # place line in game
             if is_h:
                 self.boardh[y][x] = True
             else:
                 self.boardv[y][x] = True
             # send data and turn data to each player
-            self.player0.Send({'action': 'place', 'x': x, 'y': y, 'is_horizontal': is_h, 'gameid': self.gameid, 'num': num})
-            self.player1.Send({'action': 'place', 'x': x, 'y': y, 'is_horizontal': is_h, 'gameid': self.gameid, 'num': num})
+            self.player0.Send(
+                {'action': 'place', 'x': x, 'y': y, 'is_horizontal': is_h, 'gameid': self.gameid, 'num': num}
+            )
+            self.player1.Send(
+                {'action': 'place', 'x': x, 'y': y, 'is_horizontal': is_h, 'gameid': self.gameid, 'num': num}
+            )
+            self.player1.Send({'action': 'yourturn', 'torf': True if self.turn == 1 else False})
+            self.player0.Send({'action': 'yourturn', 'torf': True if self.turn == 0 else False})
 
 
 print("STARTING SERVER ON LOCALHOST.")
