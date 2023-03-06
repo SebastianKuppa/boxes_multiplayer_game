@@ -81,7 +81,8 @@ class BoxesServer(PodSixNet.Server.Server):
             game.player1.Send({'action': 'yourturn', 'torf': True if self.games[index].turn == 1 else False})
             game.player0.Send({'action': 'yourturn', 'torf': True if self.games[index].turn == 0 else False})
             index += 1
-            self.Pump()
+        self.Pump()
+
 
 class Game:
     def __init__(self, player0, currentindex):
@@ -121,5 +122,5 @@ class Game:
 print("STARTING SERVER ON LOCALHOST.")
 boxesServer = BoxesServer()
 while True:
-    boxesServer.Pump()
+    boxesServer.tick()
     sleep(.01)
