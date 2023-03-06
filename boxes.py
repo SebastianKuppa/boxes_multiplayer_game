@@ -120,7 +120,6 @@ class BoxesGame(ConnectionListener):
 
     def update(self):
         self.justplaced -= 1
-        print(f'self.turn: {self.turn}')
         connection.Pump()
         self.Pump()
         # sleep function
