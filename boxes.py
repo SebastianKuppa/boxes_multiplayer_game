@@ -10,7 +10,7 @@ class BoxesGame(ConnectionListener):
         pygame.init()
         pygame.display.list_modes()
         # init window
-        self.window = pygame.display.set_mode((400, 589))
+        self.window = pygame.display.set_mode((500, 589))
         pygame.display.set_caption('Boxes Multiplayer Game')
         # init clock
         self.clock = pygame.time.Clock()
@@ -55,10 +55,11 @@ class BoxesGame(ConnectionListener):
 
     def initGraphics(self):
         self.normal_line_v = pygame.image.load('images/normalline.png')
-        self.normal_line_h = pygame.transform.rotate(pygame.image.load('images/normalline.png'),
-                                                     -90)
+        self.normal_line_h = pygame.transform.rotate(pygame.image.load('images/normalline.png'), -90)
+
         self.bar_h = pygame.image.load('images/bar_done.png')
         self.bar_v = pygame.transform.rotate(pygame.image.load('images/bar_done.png'), -90)
+
         self.hoverline_v = pygame.image.load('images/hover.png')
         self.hoverline_h = pygame.transform.rotate(pygame.image.load('images/hover.png'), -90)
 
@@ -81,19 +82,19 @@ class BoxesGame(ConnectionListener):
                         self.window.blit(self.othermarker, (x*64+5, y*64+5))
 
     def drawBoard(self):
-        for x in range(6):
-            for y in range(7):
-                pass
+        for y in range(7):
+            for x in range(6):
                 if not self.boardh[y][x]:
-                    self.window.blit(self.normal_line_v, [x*64+5, y*64])
+                    self.window.blit(self.normal_line_h, [(x) * 64 + 5, (y) * 64 + 5])
                 else:
-                    self.window.blit(self.bar_h, [x * 64 + 5, y * 64])
-        for x in range(7):
-            for y in range(6):
+                    self.window.blit(self.bar_h, [(x) * 64 + 5, (y) * 64 + 5])
+        for y in range(6):
+            for x in range(7):
                 if not self.boardv[y][x]:
-                    self.window.blit(self.normal_line_h, [x * 64 + 5, y * 64])
+                    self.window.blit(self.normal_line_v, [(x) * 64 + 5, (y) * 64 + 5])
+
                 else:
-                    self.window.blit(self.bar_v, [x * 64 + 5, y * 64])
+                    self.window.blit(self.bar_v, [(x) * 64 + 5, (y) * 64 + 5])
 
     def drawHUD(self):
         # init font for text "Your turn"
@@ -158,7 +159,7 @@ class BoxesGame(ConnectionListener):
                 # if not mouse_pressed:
                 self.window.blit(self.hoverline_v if is_horizontal else self.hoverline_h,
                                  [(x_pos * 64)+5,
-                                  (y_pos * 64)])
+                                  (y_pos * 64)+5])
         except IndexError:
             isOutOfBounds =True
             pass
@@ -189,9 +190,9 @@ class BoxesGame(ConnectionListener):
                     exit()
             pygame.display.flip()
 
-    def Network(self, data):
+    # def Network(self, data):
         # print("random data: ")
-        print("Network:", data)
+        # print("Network:", data)
 
 
     def Network_startgame(self, data):
@@ -219,16 +220,16 @@ class BoxesGame(ConnectionListener):
 
     def Network_win(self, data):
         self.owner[data['x']][data['y']] = "win"
-        self.boardh[data['x']][data['y']] = True
-        self.boardv[data['x']][data['y']] = True
-        self.boardh[data['x'] + 1][data['y']] = True
-        self.boardv[data['x']][data['y'] + 1] = True
+        self.boardh[data['y']][data['x']] = True
+        self.boardv[data['y']][data['x']] = True
+        self.boardh[data['y'] + 1][data['x']] = True
+        self.boardv[data['y']][data['x'] + 1] = True
         self.me += 1
 
     def Network_lose(self, data):
         self.owner[data['x']][data['y']] = "win"
-        self.boardh[data['x']][data['y']] = True
-        self.boardv[data['x']][data['y']] = True
-        self.boardh[data['x'] + 1][data['y']] = True
-        self.boardv[data['x']][data['y'] + 1] = True
+        self.boardh[data['y']][data['x']] = True
+        self.boardv[data['y']][data['x']] = True
+        self.boardh[data['y'] + 1][data['x']] = True
+        self.boardv[data['y']][data['x'] + 1] = True
         self.enemy += 1
