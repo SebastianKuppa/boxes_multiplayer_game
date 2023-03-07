@@ -82,19 +82,19 @@ class BoxesGame(ConnectionListener):
                         self.window.blit(self.othermarker, (x*64+5, y*64+5))
 
     def drawBoard(self):
-        for y in range(7):
-            for x in range(6):
+        for x in range(6):
+            for y in range(7):
+                pass
                 if not self.boardh[y][x]:
-                    self.window.blit(self.normal_line_h, [(x) * 64 + 5, (y) * 64 + 5])
+                    self.window.blit(self.normal_line_v, [x*64+5, y*64])
                 else:
-                    self.window.blit(self.bar_h, [(x) * 64 + 5, (y) * 64 + 5])
-        for y in range(6):
-            for x in range(7):
+                    self.window.blit(self.bar_h, [x * 64 + 5, y * 64])
+        for x in range(7):
+            for y in range(6):
                 if not self.boardv[y][x]:
-                    self.window.blit(self.normal_line_v, [(x) * 64 + 5, (y) * 64 + 5])
-
+                    self.window.blit(self.normal_line_h, [x * 64 + 5, y * 64])
                 else:
-                    self.window.blit(self.bar_v, [(x) * 64 + 5, (y) * 64 + 5])
+                    self.window.blit(self.bar_v, [x * 64 + 5, y * 64])
 
     def drawHUD(self):
         # init font for text "Your turn"

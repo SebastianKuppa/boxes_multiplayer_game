@@ -68,23 +68,22 @@ class BoxesServer(PodSixNet.Server.Server):
                 # 3
                 for y in range(6):
                     for x in range(6):
-                        # 4
-                        if game.boardh[y][x] and game.boardv[y][x] and game.boardh[y + 1][x] and game.boardv[y][x + 1] \
-                                and not game.owner[x][y]:
+                        if game.boardh[y][x] and game.boardv[y][x] and game.boardh[y+1][x] and game.boardv[y][x+1] and \
+                                not game.owner[x][y]:
                             if self.games[index].turn == 0:
                                 self.games[index].owner[x][y] = 2
-                                game.player1.Send({"action": "win", "x": x, "y": y})
-                                game.player0.Send({"action": "lose", "x": x, "y": y})
+                                game.player1.Send({'action': 'win', 'x': x, 'y': y})
+                                game.player0.Send({'action': 'lose', 'x': x, 'y': y})
                                 change = 1
                             else:
                                 self.games[index].owner[x][y] = 1
-                                game.player0.Send({"action": "win", "x": x, "y": y})
-                                game.player1.Send({"action": "lose", "x": x, "y": y})
+                                game.player0.Send({'action': 'win', 'x': x, 'y': y})
+                                game.player1.Send({'action': 'lose', 'x': x, 'y': y})
                                 change = 0
             # 5
             self.games[index].turn = change if change != 3 else self.games[index].turn
-            game.player1.Send({"action": "yourturn", "torf": True if self.games[index].turn == 1 else False})
-            game.player0.Send({"action": "yourturn", "torf": True if self.games[index].turn == 0 else False})
+            game.player1.Send({'action': 'yourturn', 'torf': True if self.games[index].turn == 1 else False})
+            game.player0.Send({'action': 'yourturn', 'torf': True if self.games[index].turn == 0 else False})
             index += 1
         self.Pump()
 
