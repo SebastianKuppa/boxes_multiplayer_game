@@ -216,3 +216,19 @@ class BoxesGame(ConnectionListener):
         # print('Network_yourturn:')
         # print("Network:", data)
         self.turn = data["torf"]
+
+    def Network_win(self, data):
+        self.owner[data['x']][data['y']] = "win"
+        self.boardh[data['x']][data['y']] = True
+        self.boardv[data['x']][data['y']] = True
+        self.boardh[data['x'] + 1][data['y']] = True
+        self.boardv[data['x']][data['y'] + 1] = True
+        self.me += 1
+
+    def Network_lose(self, data):
+        self.owner[data['x']][data['y']] = "win"
+        self.boardh[data['x']][data['y']] = True
+        self.boardv[data['x']][data['y']] = True
+        self.boardh[data['x'] + 1][data['y']] = True
+        self.boardv[data['x']][data['y'] + 1] = True
+        self.enemy += 1
