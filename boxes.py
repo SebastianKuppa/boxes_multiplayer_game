@@ -77,9 +77,9 @@ class BoxesGame(ConnectionListener):
             for y in range(6):
                 if self.owner[x][y] != 0:
                     if self.owner[x][y] == "win":
-                        self.window.blit(self.marker, (x*64+5, y*64+5))
+                        self.window.blit(self.marker, (x*64+10, y*64+5))
                     if self.owner[x][y] == "lose":
-                        self.window.blit(self.othermarker, (x*64+5, y*64+5))
+                        self.window.blit(self.othermarker, (x*64+10, y*64+5))
 
     def drawBoard(self):
         for x in range(6):
@@ -112,7 +112,7 @@ class BoxesGame(ConnectionListener):
         score_me = font_withsize64.render(str(self.me), True, [255, 255, 255])
         score_other = font_withsize64.render(str(self.enemy), True, [255, 255, 255])
         score_text_me = font_withsize64.render("YOU", True, [255, 255, 255])
-        score_text_other = font_withsize64.render("OTHER PLAYER", True, [255, 255, 255])
+        score_text_other = font_withsize64.render("ENEMY", True, [255, 255, 255])
 
         self.window.blit(score_text_me, (10, 450))
         self.window.blit(score_me, (10, 500))
@@ -159,7 +159,7 @@ class BoxesGame(ConnectionListener):
                 # if not mouse_pressed:
                 self.window.blit(self.hoverline_v if is_horizontal else self.hoverline_h,
                                  [(x_pos * 64)+5,
-                                  (y_pos * 64)+5])
+                                  (y_pos * 64)])
         except IndexError:
             isOutOfBounds =True
             pass
@@ -227,7 +227,7 @@ class BoxesGame(ConnectionListener):
         self.me += 1
 
     def Network_lose(self, data):
-        self.owner[data['x']][data['y']] = "win"
+        self.owner[data['x']][data['y']] = "lose"
         self.boardh[data['y']][data['x']] = True
         self.boardv[data['y']][data['x']] = True
         self.boardh[data['y'] + 1][data['x']] = True
