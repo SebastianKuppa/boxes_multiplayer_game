@@ -5,4 +5,6 @@ if __name__ == '__main__':
     bg = BoxesGame()
 
     while True:
-        bg.update()
+        if bg.update() == 1:
+            break
+    bg.finished()

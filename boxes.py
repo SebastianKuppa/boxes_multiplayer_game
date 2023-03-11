@@ -130,6 +130,11 @@ class BoxesGame(ConnectionListener):
             self.window.blit(greenplayer_icon, (240, 550))
 
     def update(self):
+        # check if the game has finished, and set win attribute accordingly
+        if self.me + self.enemy == 36:
+            self.didIwin = True if self.me > self.enemy else False
+            return 1
+
         self.justplaced -= 1
         connection.Pump()
         self.Pump()
