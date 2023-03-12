@@ -15,8 +15,8 @@ class BoxesGame(ConnectionListener):
         # init clock
         self.clock = pygame.time.Clock()
         # init lists for board values
-        self.boardh = [[False for x in range(6)] for y in range(7)]  # horizontal bars
-        self.boardv = [[False for x in range(7)] for y in range(6)]  # vertical bars
+        self.boardh = [[False for _ in range(6)] for _ in range(7)]  # horizontal bars
+        self.boardv = [[False for _ in range(7)] for _ in range(6)]  # vertical bars
 
         # init line images
         self.initGraphics()
