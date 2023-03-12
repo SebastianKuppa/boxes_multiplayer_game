@@ -20,6 +20,8 @@ class BoxesGame(ConnectionListener):
 
         # init line images
         self.initGraphics()
+        # init sounds
+        self.initSounds()
 
         self.turn = True
         self.me = 0
@@ -52,6 +54,14 @@ class BoxesGame(ConnectionListener):
             self.turn = False
             self.marker = self.blueplayer
             self.othermarker = self.greenplayer
+
+    def initSounds(self):
+        pygame.mixer.music.load("./sounds/game.mp3")
+        self.winsound = pygame.mixer.Sound("./sounds/win.mp3")
+        self.losesound = pygame.mixer.Sound("./sounds/lose.mp3")
+        self.placesound = pygame.mixer.Sound("./sounds/win_box.mp3")
+        # play background music
+        # pygame.mixer.music.play()
 
     def initGraphics(self):
         self.normal_line_v = pygame.image.load('images/normalline.png')
@@ -229,6 +239,8 @@ class BoxesGame(ConnectionListener):
             self.boardh[y][x] = True
         else:
             self.boardv[y][x] = True
+        # play sound
+        self.placesound.play()
 
     def Network_yourturn(self, data):
         # print('Network_yourturn:')
@@ -242,6 +254,8 @@ class BoxesGame(ConnectionListener):
         self.boardh[data['y'] + 1][data['x']] = True
         self.boardv[data['y']][data['x'] + 1] = True
         self.me += 1
+        # play sound
+        self.winsound.play()
 
     def Network_lose(self, data):
         self.owner[data['x']][data['y']] = "lose"
@@ -250,3 +264,5 @@ class BoxesGame(ConnectionListener):
         self.boardh[data['y'] + 1][data['x']] = True
         self.boardv[data['y']][data['x'] + 1] = True
         self.enemy += 1
+        # play sound
+        self.losesound.play()
