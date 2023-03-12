@@ -28,6 +28,9 @@ class ClientChannel(PodSixNet.Channel.Channel):
         # tells server to place line
         self._server.placeLine(hv, x, y, data, self.gameid, num)
 
+    def Close(self):
+        self._server.close(self.gameid)
+
 
 class BoxesServer(PodSixNet.Server.Server):
     channelClass = ClientChannel
@@ -51,6 +54,14 @@ class BoxesServer(PodSixNet.Server.Server):
             self.queue.player1.Send({"action": "startgame", "player": 1, "gameid": self.queue.gameid})
             self.games.append(self.queue)
             self.queue = None
+
+    def close(self, gameid):
+        try:
+            game = [a for a in self.games if a.gameid == gameid][0]
+            game.player0.Send({'action': 'close'})
+            game.player1.Send({'action': 'close'})
+        except:
+            pass
 
     def placeLine(self, is_h, x, y, data, gameid, num):
         game = [a for a in self.games if a.gameid == gameid]

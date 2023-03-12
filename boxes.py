@@ -198,7 +198,7 @@ class BoxesGame(ConnectionListener):
         pygame.display.flip()
 
     def finished(self):
-        self.window.blit(self.gameover if not self.didIwin else self.youwin, (0, 0))
+        self.window.blit(self.gameover if not self.didIwin else self.youwin, (20, 20))
         while 1:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -209,12 +209,14 @@ class BoxesGame(ConnectionListener):
         # print("random data: ")
         # print("Network:", data)
 
-
     def Network_startgame(self, data):
         print("Network_startgame:", data)
         self.running = True
         self.num = data["player"]
         self.gameid = data["gameid"]
+
+    def Network_close(self, data):
+        exit()
 
     def Network_place(self, data):
         # print("Received placing Data")

@@ -7,4 +7,5 @@ if __name__ == '__main__':
     while True:
         if bg.update() == 1:
             break
+
     bg.finished()
