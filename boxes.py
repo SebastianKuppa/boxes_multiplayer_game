@@ -55,11 +55,14 @@ class BoxesGame(ConnectionListener):
             self.marker = self.blueplayer
             self.othermarker = self.greenplayer
 
+        self.game_start.play()
+
     def initSounds(self):
         pygame.mixer.music.load("./sounds/game.mp3")
         self.winsound = pygame.mixer.Sound("./sounds/win.mp3")
         self.losesound = pygame.mixer.Sound("./sounds/lose.mp3")
         self.placesound = pygame.mixer.Sound("./sounds/win_box.mp3")
+        self.game_start = pygame.mixer.Sound("./sounds/game_start.mp3")
         # play background music
         # pygame.mixer.music.play()
 
@@ -248,21 +251,31 @@ class BoxesGame(ConnectionListener):
         self.turn = data["torf"]
 
     def Network_win(self, data):
-        self.owner[data['x']][data['y']] = "win"
+        rand_no = data['randInt']
+        if rand_no > 5:
+            self.owner[data['x']][data['y']] = "win"
+            self.me += 1
+        else:
+            self.owner[data['x']][data['y']] = "lose"
+            self.enemy += 1
         self.boardh[data['y']][data['x']] = True
         self.boardv[data['y']][data['x']] = True
         self.boardh[data['y'] + 1][data['x']] = True
         self.boardv[data['y']][data['x'] + 1] = True
-        self.me += 1
         # play sound
         self.winsound.play()
 
     def Network_lose(self, data):
-        self.owner[data['x']][data['y']] = "lose"
+        rand_no = data['randInt']
+        if rand_no > 5:
+            self.owner[data['x']][data['y']] = "lose"
+            self.enemy += 1
+        else:
+            self.owner[data['x']][data['y']] = "win"
+            self.me += 1
         self.boardh[data['y']][data['x']] = True
         self.boardv[data['y']][data['x']] = True
         self.boardh[data['y'] + 1][data['x']] = True
         self.boardv[data['y']][data['x'] + 1] = True
-        self.enemy += 1
         # play sound
         self.losesound.play()

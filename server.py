@@ -1,5 +1,6 @@
 import PodSixNet.Channel
 import PodSixNet.Server
+import random
 
 from time import sleep
 
@@ -81,15 +82,16 @@ class BoxesServer(PodSixNet.Server.Server):
                     for x in range(6):
                         if game.boardh[y][x] and game.boardv[y][x] and game.boardh[y+1][x] and game.boardv[y][x+1] and \
                                 not game.owner[x][y]:
+                            rand_no = random.randint(1, 9)
                             if self.games[index].turn == 0:
                                 self.games[index].owner[x][y] = 2
-                                game.player1.Send({'action': 'win', 'x': x, 'y': y})
-                                game.player0.Send({'action': 'lose', 'x': x, 'y': y})
+                                game.player1.Send({'action': 'win', 'x': x, 'y': y, 'randInt': rand_no})
+                                game.player0.Send({'action': 'lose', 'x': x, 'y': y, 'randInt': rand_no})
                                 change = 1
                             else:
                                 self.games[index].owner[x][y] = 1
-                                game.player0.Send({'action': 'win', 'x': x, 'y': y})
-                                game.player1.Send({'action': 'lose', 'x': x, 'y': y})
+                                game.player0.Send({'action': 'win', 'x': x, 'y': y, 'randInt': rand_no})
+                                game.player1.Send({'action': 'lose', 'x': x, 'y': y, 'randInt': rand_no})
                                 change = 0
             # 5
             self.games[index].turn = change if change != 3 else self.games[index].turn
