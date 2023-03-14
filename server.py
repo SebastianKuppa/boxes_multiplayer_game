@@ -83,15 +83,16 @@ class BoxesServer(PodSixNet.Server.Server):
                         if game.boardh[y][x] and game.boardv[y][x] and game.boardh[y+1][x] and game.boardv[y][x+1] and \
                                 not game.owner[x][y]:
                             rand_no = random.randint(1, 9)
+                            rand_box_val = random.randint(1, 2)
                             if self.games[index].turn == 0:
                                 self.games[index].owner[x][y] = 2
-                                game.player1.Send({'action': 'win', 'x': x, 'y': y, 'randInt': rand_no})
-                                game.player0.Send({'action': 'lose', 'x': x, 'y': y, 'randInt': rand_no})
+                                game.player1.Send({'action': 'win', 'x': x, 'y': y, 'randInt': rand_no, 'rand_box_val': rand_box_val})
+                                game.player0.Send({'action': 'lose', 'x': x, 'y': y, 'randInt': rand_no, 'rand_box_val': rand_box_val})
                                 change = 1
                             else:
                                 self.games[index].owner[x][y] = 1
-                                game.player0.Send({'action': 'win', 'x': x, 'y': y, 'randInt': rand_no})
-                                game.player1.Send({'action': 'lose', 'x': x, 'y': y, 'randInt': rand_no})
+                                game.player0.Send({'action': 'win', 'x': x, 'y': y, 'randInt': rand_no, 'rand_box_val': rand_box_val})
+                                game.player1.Send({'action': 'lose', 'x': x, 'y': y, 'randInt': rand_no, 'rand_box_val': rand_box_val})
                                 change = 0
             # 5
             self.games[index].turn = change if change != 3 else self.games[index].turn

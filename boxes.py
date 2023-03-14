@@ -252,12 +252,13 @@ class BoxesGame(ConnectionListener):
 
     def Network_win(self, data):
         rand_no = data['randInt']
+        rand_box_val = data['rand_box_val']
         if rand_no > 5:
             self.owner[data['x']][data['y']] = "win"
-            self.me += 1
+            self.me += rand_box_val
         else:
             self.owner[data['x']][data['y']] = "lose"
-            self.enemy += 1
+            self.enemy += rand_box_val
         self.boardh[data['y']][data['x']] = True
         self.boardv[data['y']][data['x']] = True
         self.boardh[data['y'] + 1][data['x']] = True
@@ -267,12 +268,13 @@ class BoxesGame(ConnectionListener):
 
     def Network_lose(self, data):
         rand_no = data['randInt']
+        rand_box_val = data['rand_box_val']
         if rand_no > 5:
             self.owner[data['x']][data['y']] = "lose"
-            self.enemy += 1
+            self.enemy += rand_box_val
         else:
             self.owner[data['x']][data['y']] = "win"
-            self.me += 1
+            self.me += rand_box_val
         self.boardh[data['y']][data['x']] = True
         self.boardv[data['y']][data['x']] = True
         self.boardh[data['y'] + 1][data['x']] = True
