@@ -45,6 +45,7 @@ class BoxesGame(ConnectionListener):
             self.Pump()
             connection.Pump()
             sleep(.01)
+            self.window.blit(self.waiting_display, (0, 0))
         # get player attribs
         if self.num == 0:
             self.turn = True
@@ -84,6 +85,8 @@ class BoxesGame(ConnectionListener):
 
         self.greenplayer = pygame.image.load("images/green_rect.png")
         self.blueplayer = pygame.image.load("images/blue_rect.png")
+
+        self.waiting_display = pygame.image.load("images/waiting_screen.png")
 
     def drawOwnerMap(self):
         for x in range(6):
